@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chia tiền xăng – Đi chung xe</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+<header>
+  <h1>Chia tiền xăng, khỏi ngại thu tiền</h1>
+  <p>Chọn xe, chọn đường đi. Ra ngay tiền mỗi người và mã VietQR gửi nhóm Zalo.</p>
+</header>
+
+<section aria-labelledby="s1">
+  <h2 id="s1">1. Xe và nhiên liệu</h2>
+  <div class="grid" id="vehicles"></div>
+  <label for="l100">Mức tiêu hao: <b id="l100v"></b> lít/100 km</label>
+  <input type="range" id="l100" min="1" max="14" step="0.1" value="1.8">
+  <label for="fuel">Loại nhiên liệu</label>
+  <select id="fuel"></select>
+  <label for="price">Đơn giá (đồng/lít), sửa tay nếu giá đã đổi</label>
+  <input type="number" id="price" inputmode="numeric" min="0" step="100">
+</section>
+
+<section aria-labelledby="s2">
+  <h2 id="s2">2. Lộ trình</h2>
+  <label for="from">Điểm xuất phát</label>
+  <div class="row"><input id="from" list="cities" placeholder="Gõ tên thành phố" autocomplete="off"><button class="btn ghost sm" id="geo" type="button">Vị trí hiện tại</button></div>
+  <div id="wps"></div>
+  <div style="margin-top:8px"><button class="btn ghost" id="addwp" type="button">+ Thêm điểm dừng</button></div>
+  <label for="to">Điểm đến</label>
+  <input id="to" list="cities" placeholder="Gõ tên thành phố" autocomplete="off">
+  <datalist id="cities"></datalist>
+  <div class="toggle"><input type="checkbox" id="round"><label for="round" style="margin:0"><span>Đi khứ hồi (nhân đôi quãng đường)</span></label></div>
+  <label for="road">Điều kiện đường</label>
+  <select id="road">
+    <option value="1">Đường trường, thoáng (x1.0)</option>
+    <option value="1.25">Đường đèo dốc hoặc kẹt xe (x1.25)</option>
+  </select>
+  <label for="kmman">Tự nhập quãng đường một chiều (km), để trống nếu muốn tính tự động</label>
+  <input type="number" id="kmman" inputmode="decimal" min="0" placeholder="Ví dụ 120">
+  <p class="warn" id="routewarn" role="status"></p>
+  <p class="hint" id="routehint"></p>
+</section>
+
+<section aria-labelledby="s3">
+  <h2 id="s3">3. Số người và phí phụ</h2>
+  <div class="row">
+    <div><label for="people">Số người trên xe (gồm chủ xe)</label><input type="number" id="people" min="1" max="50" value="4" inputmode="numeric"></div>
+    <div><label for="extra">Phí cao tốc, BOT, phà, gửi xe (đồng)</label><input type="number" id="extra" min="0" step="1000" value="0" inputmode="numeric"></div>
+  </div>
+</section>
+
+<div class="receipt" id="receipt" aria-live="polite">
+  <h2>Bảng chia chi phí</h2>
+  <p class="sub" id="rsub"></p>
+  <div id="lines"></div>
+  <div class="per"><small>Mỗi người trả</small><strong id="per">0 đ</strong></div>
+</div>
+
+<section aria-labelledby="s4">
+  <h2 id="s4">Mã VietQR của chủ xe</h2>
+  <label for="bank">Ngân hàng</label><select id="bank"></select>
+  <label for="acc">Số tài khoản</label><input id="acc" inputmode="numeric" placeholder="Nhập số tài khoản">
+  <label for="accname">Tên chủ tài khoản (hiện kèm mã để bạn bè đối chiếu)</label><input id="accname" placeholder="NGUYEN VAN A">
+  <div style="margin-top:12px"><button class="btn" id="mkqr" type="button">Tạo mã VietQR</button></div>
+  <p class="warn" id="qrwarn" role="status"></p>
+  <div class="qr" id="qrbox" hidden><img id="qrimg" alt="Mã VietQR chuyển khoản"><p id="qrcap"></p><p class="note">Chụp màn hình để gửi vào nhóm Zalo. Mã đã có sẵn số tiền, người chuyển chỉ cần xác nhận.</p></div>
+  <label for="msg" style="margin-top:16px">Tin nhắn gửi nhóm</label>
+  <textarea id="msg" readonly></textarea>
+  <div style="margin-top:8px"><button class="btn ghost" id="copy" type="button">Sao chép tin nhắn</button> <span class="note" id="copied" role="status"></span></div>
+</section>
+<p class="note">Bản demo ước lượng quãng đường theo tọa độ thành phố có sẵn, nhân hệ số đường bộ 1.25. Đơn giá và mức tiêu hao chỉ để tham khảo, bạn có thể sửa.</p>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/route.js"></script>
+<script src="js/vietqr.js"></script>
+<script src="js/cost.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

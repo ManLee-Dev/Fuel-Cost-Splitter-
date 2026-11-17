@@ -1,0 +1,1 @@
+{"name":"chia-tien-xang","version":"1.0.0","description":"Chia tiền xăng khi đi chung xe, kèm mã VietQR","private":true,"scripts":{"start":"npx serve .","test":"node --test"},"license":"MIT"}
