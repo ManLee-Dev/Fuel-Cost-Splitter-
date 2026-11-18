@@ -8,3 +8,4 @@ test("payload VietQR hợp lệ và CRC khớp",()=>{
   assert.ok(p.includes("0006970436"));assert.equal(crc16(p.slice(0,-4)),p.slice(-4));
 });
 //ádasd
+//231123
