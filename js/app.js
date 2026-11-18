@@ -36,6 +36,7 @@ function getGeo(){const w=$("routewarn");
 function calc(){
  const warn=[];const man=parseFloat($("kmman").value);let oneWay=0,pts=[];
  const names=[];
+ updateMapLink();
  const from=geoPt?{...geoPt,name:$("from").value}:findCity($("from").value);
  if(!from&&$("from").value.trim())warn.push("Chưa nhận diện điểm xuất phát");
  const mids=[...$("wps").querySelectorAll("input")].map(i=>i.value.trim()).filter(Boolean).map(v=>({v,c:findCity(v)}));
@@ -52,6 +53,16 @@ function calc(){
  $("lines").innerHTML=[["Tổng quãng đường",fmt(km)+" km"],["Nhiên liệu tiêu thụ",liters.toFixed(1)+" lít"],["Tiền nhiên liệu",fmt(fuelCost)+" đ"],["Phí cầu đường, phụ",fmt(extra)+" đ"],["Tổng chi phí",fmt(total)+" đ"],["Chia cho",people+" người"]].map(r=>`<div class="line"><span>${r[0]}</span><b>${r[1]}</b></div>`).join("");
  $("per").textContent=fmt(per)+" đ";
  $("msg").value=`Chia tiền xăng chuyến ${$("from").value||"..."} → ${$("to").value||"..."}${$("round").checked?" (khứ hồi)":""}\nQuãng đường ${fmt(km)} km, ${liters.toFixed(1)} lít, tổng ${fmt(total)} đ.\nMỗi người ${fmt(per)} đ (${people} người).`+($("acc").value?`\nChuyển khoản: ${BANKS.find(b=>b[1]===$("bank").value)[0]} ${$("acc").value} ${$("accname").value.toUpperCase()}`:"");
+}
+
+function updateMapLink(){
+ const link=$("mapLink"),origin=geoPt?`${geoPt.lat},${geoPt.lng}`:$("from").value.trim(),destination=$("to").value.trim();
+ if(!origin||!destination){link.removeAttribute("href");link.setAttribute("aria-disabled","true");link.tabIndex=-1;return}
+ const params=new URLSearchParams({api:"1",origin,destination,travelmode:"driving"});
+ const waypoints=[...$("wps").querySelectorAll("input")].map(i=>i.value.trim()).filter(Boolean);
+ if(waypoints.length)params.set("waypoints",waypoints.join("|"));
+ link.href=`https://www.google.com/maps/dir/?${params.toString()}`;
+ link.setAttribute("aria-disabled","false");link.removeAttribute("tabindex");
 }
 
 function makeQR(){

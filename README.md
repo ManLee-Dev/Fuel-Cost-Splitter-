@@ -1,6 +1,6 @@
 # Chia tiền xăng
 
-Web app tính và chia chi phí nhiên liệu khi đi chung xe, tạo mã VietQR để thu tiền.
+Web app tính và chia chi phí nhiên liệu khi đi chung xe, mở lộ trình lái xe bằng Google Maps và tạo mã VietQR để thu tiền.
 
 ## Chạy
 - Cách nhanh: mở `index.html` bằng trình duyệt (cần mạng để tải thư viện QR từ CDN).
@@ -20,6 +20,7 @@ Web app tính và chia chi phí nhiên liệu khi đi chung xe, tạo mã VietQR
 | `test/` | Kiểm thử bằng `node:test` |
 
 ## Hạn chế và hướng phát triển
-- Quãng đường đang ước lượng theo tọa độ 32 thành phố nhân hệ số 1.25. Để đo đường thật, thay `legKm` trong `js/route.js` bằng OSRM hoặc Google Directions, và `findCity` bằng geocoding (Nominatim).
+- Nút Google Maps mở lộ trình lái xe với điểm xuất phát, điểm dừng và điểm đến. Tính năng này dùng liên kết chỉ đường, không cần API key.
+- Quãng đường dùng trong phép tính hiện vẫn là ước lượng theo tọa độ 32 thành phố nhân hệ số 1.25, không được lấy tự động từ Google Maps. Để có dữ liệu đường thực tế trong ứng dụng, cần tích hợp dịch vụ Directions API cùng API key và cấu hình thanh toán; hiện có thể xem quãng đường trên Google Maps rồi nhập thủ công.
 - Giá nhiên liệu và mức tiêu hao trong `js/data.js` là số tham khảo, cần cập nhật định kỳ hoặc lấy từ API.
 - Phí BOT chưa tự tính theo tuyến, hiện nhập tay.

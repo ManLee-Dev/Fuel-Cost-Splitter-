@@ -9,12 +9,14 @@
 <body>
 <main>
 <header>
-  <h1>Chia tiền xăng, khỏi ngại thu tiền</h1>
-  <p>Chọn xe, chọn đường đi. Ra ngay tiền mỗi người và mã VietQR gửi nhóm Zalo.</p>
+  <div class="brand"><span class="brand-mark" aria-hidden="true">↗</span> ĐI CHUNG • CHIA PHÍ CÔNG BẰNG</div>
+  <h1>Chuyến đi vui,<br><span>chi phí rõ ràng.</span></h1>
+  <p>Tính tiền xăng minh bạch, mở lộ trình trên Google Maps và gửi VietQR cho cả nhóm.</p>
+  <div class="hero-meta"><span>✓ Tính nhanh</span><span>✓ Chia đều</span><span>✓ Không cần đăng nhập</span></div>
 </header>
 
 <section aria-labelledby="s1">
-  <h2 id="s1">1. Xe và nhiên liệu</h2>
+  <h2 id="s1"><span class="step">01</span><span>Xe và nhiên liệu</span></h2>
   <div class="grid" id="vehicles"></div>
   <label for="l100">Mức tiêu hao: <b id="l100v"></b> lít/100 km</label>
   <input type="range" id="l100" min="1" max="14" step="0.1" value="1.8">
@@ -25,7 +27,7 @@
 </section>
 
 <section aria-labelledby="s2">
-  <h2 id="s2">2. Lộ trình</h2>
+  <h2 id="s2"><span class="step">02</span><span>Lộ trình</span></h2>
   <label for="from">Điểm xuất phát</label>
   <div class="row"><input id="from" list="cities" placeholder="Gõ tên thành phố" autocomplete="off"><button class="btn ghost sm" id="geo" type="button">Vị trí hiện tại</button></div>
   <div id="wps"></div>
@@ -41,27 +43,31 @@
   </select>
   <label for="kmman">Tự nhập quãng đường một chiều (km), để trống nếu muốn tính tự động</label>
   <input type="number" id="kmman" inputmode="decimal" min="0" placeholder="Ví dụ 120">
+  <div class="map-actions">
+    <a class="btn map-btn" id="mapLink" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" aria-disabled="true">↗ <span>Mở lộ trình trên Google Maps</span></a>
+    <p class="hint">Google Maps sẽ mở trong tab mới. Để tính sát thực tế, xem quãng đường trên Maps rồi nhập vào ô bên trên.</p>
+  </div>
   <p class="warn" id="routewarn" role="status"></p>
   <p class="hint" id="routehint"></p>
 </section>
 
 <section aria-labelledby="s3">
-  <h2 id="s3">3. Số người và phí phụ</h2>
-  <div class="row">
+  <h2 id="s3"><span class="step">03</span><span>Số người và phí phụ</span></h2>
+  <div class="row people-row">
     <div><label for="people">Số người trên xe (gồm chủ xe)</label><input type="number" id="people" min="1" max="50" value="4" inputmode="numeric"></div>
     <div><label for="extra">Phí cao tốc, BOT, phà, gửi xe (đồng)</label><input type="number" id="extra" min="0" step="1000" value="0" inputmode="numeric"></div>
   </div>
 </section>
 
 <div class="receipt" id="receipt" aria-live="polite">
-  <h2>Bảng chia chi phí</h2>
+  <div class="receipt-heading"><span class="receipt-icon" aria-hidden="true">₫</span><div><h2>Bảng chia chi phí</h2><p class="receipt-kicker">TỔNG KẾT CHUYẾN ĐI</p></div></div>
   <p class="sub" id="rsub"></p>
   <div id="lines"></div>
   <div class="per"><small>Mỗi người trả</small><strong id="per">0 đ</strong></div>
 </div>
 
 <section aria-labelledby="s4">
-  <h2 id="s4">Mã VietQR của chủ xe</h2>
+  <h2 id="s4"><span class="step">04</span><span>Thanh toán &amp; chia sẻ</span></h2>
   <label for="bank">Ngân hàng</label><select id="bank"></select>
   <label for="acc">Số tài khoản</label><input id="acc" inputmode="numeric" placeholder="Nhập số tài khoản">
   <label for="accname">Tên chủ tài khoản (hiện kèm mã để bạn bè đối chiếu)</label><input id="accname" placeholder="NGUYEN VAN A">
@@ -72,7 +78,7 @@
   <textarea id="msg" readonly></textarea>
   <div style="margin-top:8px"><button class="btn ghost" id="copy" type="button">Sao chép tin nhắn</button> <span class="note" id="copied" role="status"></span></div>
 </section>
-<p class="note">Bản demo ước lượng quãng đường theo tọa độ thành phố có sẵn, nhân hệ số đường bộ 1.25. Đơn giá và mức tiêu hao chỉ để tham khảo, bạn có thể sửa.</p>
+<p class="note footer-note">Quãng đường tự động là ước tính theo tọa độ thành phố (đã nhân hệ số đường bộ 1,25), không phải dữ liệu thời gian thực từ Google Maps. Đơn giá nhiên liệu và mức tiêu hao có thể thay đổi.</p>
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -81,6 +87,7 @@
 <script src="js/vietqr.js"></script>
 <script src="js/cost.js"></script>
 <script src="js/app.js"></script>
-
+</body>
+</html>
 
 
